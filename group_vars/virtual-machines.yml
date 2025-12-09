@@ -1,0 +1,22 @@
+---
+virtual_machines:
+  GITLAB-01:
+    vm_id: 101
+    vm_name: GITLAB-01
+    vm_ip_address: 192.168.101.251
+  JNKN-01:
+    vm_id: 102
+    vm_name: JNKN-01
+    vm_ip_address: 192.168.101.250
+  EVE-01:
+    vm_id: 103
+    vm_name: EVE-01
+    vm_ip_address: 192.168.101.253
+  CTRL-01:
+    vm_id: 104
+    vm_name: CTRL-01
+    vm_ip_address: 192.168.101.11
+  JNKN-AGNT-01:
+    vm_id: 105
+    vm_name: JNKN-AGNT-01
+    vm_ip_address: 192.168.101.249
