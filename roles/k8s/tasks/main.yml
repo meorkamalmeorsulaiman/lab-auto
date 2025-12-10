@@ -3,5 +3,5 @@
 # tasks file for k8s
 
 - name: Setting up kernel
-  include_takss: "set-kernel.yml"
+  include_tasks: "set-kernel.yml"
 
