@@ -12,15 +12,25 @@
     repo: 'https://github.com/sandervanvugt/cka'
     dest: /tmp/cka
 
+- name: Populate service facts
+  service_facts:
+
+- debug:
+    msg: Containerd installed!
+  when: "'containerd.service' in services"
+
+
 - name: Installing container runtime
   shell: sh /tmp/cka/setup-container-previous-version.sh
   args:
     removes: /tmp/cka/setup-container-previous-version.sh
+  when: "'containerd.service' not in services"
 
 - name: Installing kubetools
   shell: sh /tmp/cka/setup-kubetools-previousversion.sh
   args:
     removes: /tmp/cka/setup-kubetools-previousversion.sh
+  when: "'containerd.service' not in services"
 
 - name: Clean up installation directory
   file:
