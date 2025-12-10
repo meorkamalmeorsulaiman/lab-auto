@@ -5,6 +5,11 @@ pipeline {
         PROX_TOKEN_ID = "${PROX_TOKEN_ID}"
     }
 
+    parameters {
+	choice (name: 'JOB_TYPE', choices: ['create-vm', 'deploy-k8s'], description: 'Select deployment type')
+    
+    }
+
     stages {
         stage('Creating Virtual Machine') {
             steps {
