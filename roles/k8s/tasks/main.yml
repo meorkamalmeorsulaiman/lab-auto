@@ -3,5 +3,7 @@
 # tasks file for k8s
 
 - name: Setting up kernel
-  include_tasks: "set-kernel.yml"
+  include_tasks: 'set-kernel.yml'
 
+- name: Installing CRI and Tools
+  include_tasks: 'install-tools.yml'
