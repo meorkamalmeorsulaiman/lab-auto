@@ -15,7 +15,8 @@
 - name: Populate service facts
   service_facts:
 
-- debug:
+- name: Check containerd if installed
+  debug:
     msg: Containerd installed!
   when: "'containerd.service' in services"
 
