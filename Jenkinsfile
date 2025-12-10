@@ -6,14 +6,13 @@ pipeline {
     }
 
     parameters {
-	choice (name: 'JOB_TYPE', choices: ['create-vm', 'deploy-k8s'], description: 'Select deployment type')
-    
+		choice (name: 'JOB_TYPE', choices: ['create-vm', 'deploy-k8s'], description: 'Select deployment type')
     }
 
     stages {
         stage('Creating Virtual Machine') {
 	    when {
-		expression {params.JOB_TYPE == 'create-vm'}
+			expression {params.JOB_TYPE == 'create-vm'}
 	    }
             steps {
 				echo "*** Creating virtual machine ***"
@@ -26,7 +25,7 @@ pipeline {
         }
         stage('Deploy K8s') {
 	    when {
-		expression {params.JOB_TYPE == 'deploy-k8s'}
+			expression {params.JOB_TYPE == 'deploy-k8s'}
 	    }
             steps {
 				echo "*** Deploying K8s cluster ***"
