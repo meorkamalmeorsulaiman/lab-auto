@@ -12,6 +12,9 @@ pipeline {
 
     stages {
         stage('Creating Virtual Machine') {
+	    when {
+		expression {params.JOB_TYPE == 'create-vm'}
+	    }
             steps {
 				echo "*** Creating virtual machine ***"
 				maskPasswords(varPasswordPairs: [[var: '${env.PROX_TOKEN_ID}']], varMaskRegexes: []) {
