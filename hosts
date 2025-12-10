@@ -1,9 +1,12 @@
-
 [prox02]
 192.168.101.254
 
 [vm_template]
 192.168.101.252
+
+[k8s_nodes]
+ctrl-01 ansible_host=192.168.101.11
+wrk-01 ansible_host=192.168.101.21
 
 [k8s_controllers]
 ctrl-01 ansible_host=192.168.101.11
