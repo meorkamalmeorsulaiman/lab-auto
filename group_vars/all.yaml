@@ -6,3 +6,4 @@ node: prox02
 task_timeout: 500
 clone_source: UBUNTU-TMPLT
 clone_source_id: 101
+gateway: 192.168.101.1
