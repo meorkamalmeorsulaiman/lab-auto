@@ -24,5 +24,18 @@ pipeline {
 				echo '*** Proceed to login via SSH ***'
             }
         }
+        stage('Deploy K8s') {
+	    when {
+		expression {params.JOB_TYPE == 'deploy-k8s'}
+	    }
+            steps {
+				echo "*** Deploying K8s cluster ***"
+				maskPasswords(varPasswordPairs: [[var: '${env.PROX_TOKEN_ID}']], varMaskRegexes: []) {
+					sh "ansible-playbook playbook/deploy-k8s.yml -e \'api_token_secret=${env.PROX_TOKEN_ID}\'"
+				}
+				echo '*** Virtual machine provisioned ***'
+				echo '*** Proceed to login via SSH ***'
+            }
+        }
     }
 }
