@@ -4,7 +4,8 @@
   become_user: "{{ ansible_user }}"
   command: kubectl get nodes -o json
   register: kubectl_get_nodes_output
-  ignore_errors: true 
+  no_log: true
+  ignore_errors: true
   check_mode: false
 
 - name: Initialize Kubernetes cluster
