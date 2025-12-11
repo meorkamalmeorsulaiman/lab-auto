@@ -32,8 +32,7 @@ pipeline {
 				maskPasswords(varPasswordPairs: [[var: '${env.PROX_TOKEN_ID}']], varMaskRegexes: []) {
 					sh "ansible-playbook playbook/deploy-k8s.yml -e \'api_token_secret=${env.PROX_TOKEN_ID}\'"
 				}
-				echo '*** Virtual machine provisioned ***'
-				echo '*** Proceed to login via SSH ***'
+				echo '*** Cluster initialized, proceed to join worker in the cluster ***'
             }
         }
     }
