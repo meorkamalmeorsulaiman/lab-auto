@@ -2,9 +2,15 @@
 ---
 # tasks file for k8s
 
-- name: Set module
+- name: Set module br_netfiter
   modprobe:
     name: br_netfilter
+    state: present
+    persistent: present
+
+- name: Set module overlay
+  modprobe:
+    name: overlay
     state: present
     persistent: present
 
