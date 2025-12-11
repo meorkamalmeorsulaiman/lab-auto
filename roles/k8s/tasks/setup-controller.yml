@@ -44,3 +44,10 @@
     cmd: kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
   when: not config_file_check.stat.exists
 
+- name: Getting join token
+  command: kubeadm token create --print-join-command
+  register: result_var
+
+- name: Run below command on worker nodes
+  debug:
+    msg: "{{ result_var.stdout }}"
