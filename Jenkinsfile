@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'agnt-01' }
+    agent { label 'agent-01' }
 
     environment {
         PROX_TOKEN_ID = "${PROX_TOKEN_ID}"
