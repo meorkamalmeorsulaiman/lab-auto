@@ -2,15 +2,13 @@
 - name: Check if cluster has been initizlized
   become: yes
   become_user: "{{ ansible_user }}"
-  command: kubectl get nodes -o json
+  command: kubectl get nodes
   register: kubectl_get_nodes_output
-  no_log: true
-  ignore_errors: true
-  check_mode: false
+  failed_when: False
 
 - name: Initialize Kubernetes cluster
   command: kubeadm init
-  when: kubectl_get_nodes_output.failed
+  when: kubectl_get_nodes_output.rc !=0
 
 - name: Create kubeconfig directory
   file:
