@@ -10,4 +10,4 @@
 
 - name: Initialize K8s contoller
   include_tasks: 'setup-controller.yml'
-  when: inventory_hostname == "k8s_controllers"
+  when: "'k8s_controllers' in group_names"

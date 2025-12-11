@@ -7,7 +7,7 @@
     path: /home/{{ ansible_user }}/.kube
     state: directory
     mode: '0755'
-    owner: {{ ansible_user }}
+    owner: "{{ ansible_user }}"
 
 - name: Copy kubeconfig
   copy:
@@ -15,6 +15,7 @@
     dest: /home/{{ ansible_user }}/.kube/config
     owner: "{{ ansible_user }}"
     mode: '0644'
+    remote_src: yes
 
 - name: Set ownership for kubeconfig config file 
   file:
