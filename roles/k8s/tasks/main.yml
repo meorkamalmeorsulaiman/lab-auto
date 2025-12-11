@@ -7,3 +7,7 @@
 
 - name: Installing Containerd and kubetool
   include_tasks: 'install-tools.yml'
+
+- name: Initialize K8s contoller
+  include_tasks: 'setup-controller.yml'
+  when: "'k8s_controllers' in group_names"

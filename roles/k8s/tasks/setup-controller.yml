@@ -1,0 +1,46 @@
+---
+- name: Check if cluster has been initizlized
+  become: yes
+  become_user: "{{ ansible_user }}"
+  command: kubectl get nodes
+  register: kubectl_get_nodes_output
+  failed_when: False
+
+- name: Initialize Kubernetes cluster
+  command: kubeadm init
+  when: kubectl_get_nodes_output.rc !=0
+
+- name: Create kubeconfig directory
+  file:
+    path: /home/{{ ansible_user }}/.kube
+    state: directory
+    mode: '0755'
+    owner: "{{ ansible_user }}"
+
+- name: Copy kubeconfig
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest: /home/{{ ansible_user }}/.kube/config
+    owner: "{{ ansible_user }}"
+    mode: '0644'
+    remote_src: yes
+
+- name: Set ownership for kubeconfig config file 
+  file:
+    path: /home/{{ ansible_user }}/.kube/config
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0644'
+
+- name: Check if network plugin installed
+  stat:
+    path: /etc/cni/net.d/calico-kubeconfig
+  register: config_file_check
+
+- name: Setting up network plugin
+  become: yes
+  become_user: "{{ ansible_user }}"
+  command:  
+    cmd: kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+  when: not config_file_check.stat.exists
+
