@@ -5,9 +5,5 @@
 - name: Setting up kernel
   include_tasks: 'set-kernel.yml'
 
-- name: Installing Containerd and kubetool
+- name: Installing Container runtime and kubetool
   include_tasks: 'install-tools.yml'
-
-- name: Initialize K8s contoller
-  include_tasks: 'setup-controller.yml'
-  when: "'k8s_controllers' in group_names"
