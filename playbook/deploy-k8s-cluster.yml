@@ -1,0 +1,6 @@
+---
+- name: Deploying VMs
+  hosts: ctrl-01
+  become: true
+  roles:
+    - roles/k8s-cluster

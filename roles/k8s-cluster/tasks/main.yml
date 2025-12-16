@@ -5,5 +5,5 @@
 - name: Setting up kernel
   include_tasks: 'set-kernel.yml'
 
-- name: Installing Container runtime and kubetool
-  include_tasks: 'install-tools.yml'
+- name: Installing Container runtime
+  include_tasks: 'install-cri.yml'
