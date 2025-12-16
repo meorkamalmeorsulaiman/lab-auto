@@ -20,3 +20,11 @@ virtual_machines:
     vm_id: 106
     vm_name: WRK-01
     vm_ip_address: 192.168.101.21
+  CTRL-02:
+    vm_id: 107
+    vm_name: CTRL-02
+    vm_ip_address: 192.168.101.12
+  CTRL-03:
+    vm_id: 108
+    vm_name: CTRL-03
+    vm_ip_address: 192.168.101.13
