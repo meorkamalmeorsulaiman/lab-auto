@@ -7,3 +7,6 @@
 
 - name: Installing Container runtime
   include_tasks: 'install-cri.yml'
+
+- name: Installing Kubetools
+  include_tasks: 'install-kubetools.yml'
