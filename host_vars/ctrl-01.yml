@@ -1,0 +1,6 @@
+ha_cluster:
+  CTRL-01:
+    if_name: eth0
+    vip: 192.168.101.10
+    state: MASTER
+    priority: 255
