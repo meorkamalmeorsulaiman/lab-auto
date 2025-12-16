@@ -1,0 +1,73 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for k8s-cluster
+
+- name: Download containerd binaries
+  get_url:
+    url:  https://github.com/containerd/containerd/releases/download/v{{ CONTAINERD_VERSION }}/containerd-{{ CONTAINERD_VERSION }}-linux-amd64.tar.gz
+    dest: /tmp
+
+- name: Setting up directory for extracting binaries
+  file:
+    path: /tmp/containerd-{{ CONTAINERD_VERSION }}
+    state: directory
+
+- name: Extracting and setting up binaries 
+  unarchive:
+    src: /tmp/containerd-{{ CONTAINERD_VERSION }}-linux-amd64.tar.gz
+    dest:  /usr/local
+    remote_src: yes
+
+- name: Setting up containerd directory 
+  file:
+    path: /etc/containerd
+    state: directory
+
+- name: Creating containerd configs
+  copy:
+    src: config.toml
+    dest: /etc/containerd
+
+- name: Downloading up containerd systemd config
+  get_url:
+    url: https://raw.githubusercontent.com/containerd/containerd/main/containerd.service
+    dest: /tmp
+
+- name: Setting up containerd systemd 
+  copy: 
+    src: /tmp/containerd.service 
+    dest: /usr/lib/systemd/system/
+    remote_src: yes
+
+- name: Reload systemd daemon
+  systemd_service:
+    daemon_reload: true
+
+- name: Enable service httpd and ensure it is not masked
+  systemd_service:
+    name: containerd
+    state: started
+    enabled: true
+
+- name: Downloading runc binaries
+  get_url:
+    url: https://github.com/opencontainers/runc/releases/download/v{{ RUNC_VERSION }}/runc.amd64
+    dest: /tmp
+
+- name: Setting up runc 
+  copy: 
+    src: /tmp/runc.amd64 
+    dest: /usr/local/sbin/runc
+    remote_src: yes
+    mode: '0755'
+
+- name: Setting up AppArmor
+  file:
+    src: /etc/apparmor.d/runc
+    dest: /etc/apparmor.d/disable/runc
+    state: link
+
+- name: Load profile
+  systemd_service:
+    name: apparmor
+    state: restarted
