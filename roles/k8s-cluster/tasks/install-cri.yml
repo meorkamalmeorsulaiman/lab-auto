@@ -2,12 +2,6 @@
 ---
 # tasks file for k8s-cluster
 
-- name: Installing necessary packages
-  apt:
-    name: 
-      - git
-    state: present
-
 - name: Download containerd binaries
   get_url:
     url:  https://github.com/containerd/containerd/releases/download/v{{ CONTAINERD_VERSION }}/containerd-{{ CONTAINERD_VERSION }}-linux-amd64.tar.gz
