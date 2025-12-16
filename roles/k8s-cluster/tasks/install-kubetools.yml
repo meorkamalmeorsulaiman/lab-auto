@@ -1,0 +1,36 @@
+---
+- name: Download signing key 
+  shell:
+    cmd: "curl -fsSL https://pkgs.k8s.io/core:/stable:/v{{ K8S_VERSION }}/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg"
+  args:
+    creates: /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
+- name: Setting up repository 
+  apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v{{ K8S_VERSION }}/deb/ /"
+    filename: kubernetes
+    state: present
+    update_cache: yes
+
+- name: Installing kubelet, kubeadm and kubectl 
+  apt:
+    pkg:
+      - kubelet
+      - kubeadm 
+      - kubectl 
+    update_cache: yes
+
+- name: Pin kubelet
+  dpkg_selections:
+    name: kubelet
+    selection: hold
+
+- name: Pin kubeadm 
+  dpkg_selections:
+    name: kubeadm
+    selection: hold
+
+- name: Pin kubectl
+  dpkg_selections:
+    name: kubectl
+    selection: hold

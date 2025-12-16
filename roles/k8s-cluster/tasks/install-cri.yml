@@ -43,7 +43,7 @@
   systemd_service:
     daemon_reload: true
 
-- name: Enable service httpd and ensure it is not masked
+- name: Enable service and starting containerd
   systemd_service:
     name: containerd
     state: started

@@ -6,7 +6,7 @@ pipeline {
     }
 
     parameters {
-		choice (name: 'JOB_TYPE', choices: ['create-vm', 'deploy-k8s'], description: 'Select deployment type')
+		choice (name: 'JOB_TYPE', choices: ['create-vm', 'deploy-k8s', 'deploy-k8s-ha-cluster'], description: 'Select deployment type')
     }
 
     stages {
@@ -31,6 +31,18 @@ pipeline {
 				echo "*** Deploying K8s cluster ***"
 				maskPasswords(varPasswordPairs: [[var: '${env.PROX_TOKEN_ID}']], varMaskRegexes: []) {
 					sh "ansible-playbook playbook/deploy-k8s.yml -e \'api_token_secret=${env.PROX_TOKEN_ID}\'"
+				}
+				echo '*** Cluster initialized, proceed to join worker in the cluster ***'
+            }
+        }
+        stage('Deploy K8s HA Cluster') {
+	    when {
+			expression {params.JOB_TYPE == 'deploy-k8s-ha-cluster'}
+	    }
+            steps {
+				echo "*** Deploying K8s cluster ***"
+				maskPasswords(varPasswordPairs: [[var: '${env.PROX_TOKEN_ID}']], varMaskRegexes: []) {
+					sh "ansible-playbook playbook/deploy-k8s-cluster.yml -e \'api_token_secret=${env.PROX_TOKEN_ID}\'"
 				}
 				echo '*** Cluster initialized, proceed to join worker in the cluster ***'
             }
