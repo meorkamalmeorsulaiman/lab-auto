@@ -2,5 +2,6 @@
 - name: Deploying VMs
   hosts: k8s_nodes
   become: true
+  gather_facts: false
   roles:
     - roles/k8s-cluster
