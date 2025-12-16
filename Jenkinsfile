@@ -35,7 +35,7 @@ pipeline {
 				echo '*** Cluster initialized, proceed to join worker in the cluster ***'
             }
         }
-        stage('Deploy K8s Cluster') {
+        stage('Deploy K8s HA Cluster') {
 	    when {
 			expression {params.JOB_TYPE == 'deploy-k8s-ha-cluster'}
 	    }
