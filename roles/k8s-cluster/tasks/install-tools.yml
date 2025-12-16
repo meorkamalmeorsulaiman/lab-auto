@@ -1,0 +1,39 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for k8s-cluster
+
+- name: Installing Git
+  apt:
+    name: git
+    state: present
+
+- name: Downloading installation script
+  git:
+    repo: 'https://github.com/sandervanvugt/cka'
+    dest: /tmp/cka
+
+- name: Populate service facts
+  service_facts:
+
+- name: Check containerd if installed
+  debug:
+    msg: Containerd installed!
+  when: "'containerd.service' in services"
+
+
+- name: Installing container runtime
+  shell: sh /tmp/cka/setup-container-previous-version.sh
+  args:
+    removes: /tmp/cka/setup-container-previous-version.sh
+  when: "'containerd.service' not in services"
+
+- name: Installing kubetools
+  shell: sh /tmp/cka/setup-kubetools-previousversion.sh
+  args:
+    removes: /tmp/cka/setup-kubetools-previousversion.sh
+  when: "'containerd.service' not in services"
+
+- name: Clean up installation directory
+  file:
+    path: /tmp/cka
+    state: absent
