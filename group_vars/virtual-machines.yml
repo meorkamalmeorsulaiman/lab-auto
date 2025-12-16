@@ -28,3 +28,8 @@ virtual_machines:
     vm_id: 108
     vm_name: WRK-01
     vm_ip_address: 192.168.101.21
+  WRK-02:
+    vm_id: 109
+    vm_name: WRK-02
+    vm_ip_address: 192.168.101.22
+
