@@ -1,7 +1,14 @@
 ---
-ha_cluster:
-  CTRL-02:
+keepalived:
+  - name: k8s_ha_cluster
     if_name: eth0
     vip: 192.168.101.10
     state: SLAVE
     priority: 254
+
+haproxy:
+  - name: apiserver
+    backend_servers: 
+      - 192.168.101.11
+      - 192.168.101.12
+      - 192.168.101.13

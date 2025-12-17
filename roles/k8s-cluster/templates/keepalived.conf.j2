@@ -1,5 +1,4 @@
-{% for node, details in ha_cluster.items() %}
-! Config for {{ node }}
+{% for node in keepalived %}
 ! /etc/keepalived/keepalived.conf
 ! Configuration File for keepalived
 global_defs {
@@ -14,17 +13,17 @@ vrrp_script check_apiserver {
   rise 2
 }
 
-vrrp_instance VI_1 {
-    state {{ details.state }}
-    interface {{ details.if_name }}
+vrrp_instance {{ node.name }} {
+    state {{ node.state }}
+    interface {{ node.if_name }}
     virtual_router_id 151
-    priority {{ details.priority }}
+    priority {{ node.priority }}
     authentication {
         auth_type PASS
         auth_pass Password
     }
     virtual_ipaddress {
-        {{ details.vip }}/24
+        {{ node.vip }}/24
     }
     track_script {
         check_apiserver
