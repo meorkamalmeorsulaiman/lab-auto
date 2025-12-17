@@ -1,5 +1,5 @@
-[prox02]
-192.168.101.254
+[proxmox]
+prox-02 ansible_host=192.168.101.254
 
 [vm_template]
 192.168.101.252
