@@ -1,6 +1,9 @@
 ---
 proxmox_node: prox02
 virtual_machines:
+  # - name: 
+  #   vm_id:
+  #   vm_ip_address:
   - name: TEST-01
     vm_id: 110
     vm_ip_address: 192.168.101.110
