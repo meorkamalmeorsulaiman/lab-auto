@@ -12,9 +12,27 @@
 - name: Setting up keepalived config file 
   template:
     src: keepalived.conf.j2
-    dest: /tmp/keepalived.conf
+    dest: /etc/keepalived/keepalived.conf
+
+- name: Setting up health check script 
+  copy:
+    src: check_apiserver.sh
+    dest: /etc/keepalived
+    mode: '0755'
 
 - name: Setting up haproxy config file 
   template:
     src: haproxy.cfg.j2 
-    dest: /tmp/haproxy.cfg
+    dest: /etc/haproxy/haproxy.cfg
+
+- name: Starting and enable Keepalived
+  systemd_service:
+    name: keepalived
+    state: started
+    enabled: true
+
+- name: Starting and enable HAProxy
+  systemd_service:
+    name: haproxy
+    state: started
+    enabled: true
