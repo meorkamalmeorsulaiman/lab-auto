@@ -1,6 +1,6 @@
 ---
 k8s_cluster:
-    if_name: eth0
-    vip: 192.168.101.10
-    state: SLAVE
-    priority: 254
+  if_name: eth0
+  vip: 192.168.101.10
+  state: SLAVE
+  priority: 254
