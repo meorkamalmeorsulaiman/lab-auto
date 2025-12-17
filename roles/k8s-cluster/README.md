@@ -8,6 +8,15 @@ Requirements
 
 Hosts ubuntu and SSH enabled, role tested on ubuntu 24 sudo passwordless with user `ansible` required. 
 
+### Generic `all.yml`
+
+- Specify user that use to manage the remote host on `ansible_user` variable
+```
+<snippet>
+ansible_user: USERNAME
+```
+
+
 ### Hosts
 - Groups:
   - k8s_nodes
