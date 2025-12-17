@@ -44,6 +44,17 @@
     group: "{{ ansible_user }}"
     mode: '0644'
 
+- name: Check if CNI plugin installed
+  stat:
+    path: /etc/cni/net.d/calico-kubeconfig
+  register: config_file_check
+
+- name: Setting up network plugin
+  become: false
+  command:  
+    cmd: kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+  when: not config_file_check.stat.exists
+
 - name: Getting worker join token
   command: kubeadm token create --print-join-command
   register: worker_join_command
@@ -55,3 +66,4 @@
     dest: /tmp/worker-join-command.sh
     mode: '0755'
   delegate_to: localhost
+
