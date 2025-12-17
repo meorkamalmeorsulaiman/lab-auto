@@ -9,7 +9,7 @@
   register: kubectl_get_nodes_output
   failed_when: False
 
-- name: Getting control join certificate key
+- name: Joining control nodes into cluster
   shell: sh /tmp/control-join-command.sh 
   register: control_join_output
   when: kubectl_get_nodes_output.rc !=0
