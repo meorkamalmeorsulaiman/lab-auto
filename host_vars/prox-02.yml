@@ -1,4 +1,5 @@
 ---
+proxmox_node: prox02
 virtual_machines:
   - name: TEST-01
     vm_id: 110
