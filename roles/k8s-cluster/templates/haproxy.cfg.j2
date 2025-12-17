@@ -39,7 +39,7 @@ backend {{ node.name }}
     mode tcp
     option ssl-hello-chk
     balance roundrobin
-    {% for backend in node.backend_servers %}
+{% for backend in node.backend_servers %}
         server {{ backend }} {{ backend }}:6443 check
-    {% endfor %}
+{% endfor %}
 {% endfor %}
