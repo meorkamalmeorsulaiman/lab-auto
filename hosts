@@ -4,18 +4,25 @@
 [vm_template]
 192.168.101.252
 
-[k8s_nodes]
-ctrl-01 ansible_host=192.168.101.11
-ctrl-02 ansible_host=192.168.101.12
-ctrl-03 ansible_host=192.168.101.13
-wrk-01 ansible_host=192.168.101.21
-wrk-02 ansible_host=192.168.101.22
-
 [k8s_controllers]
 ctrl-01 ansible_host=192.168.101.11
 ctrl-02 ansible_host=192.168.101.12
 ctrl-03 ansible_host=192.168.101.13
 
+[k8s_controllers_master]
+ctrl-01 ansible_host=192.168.101.11
+
+[k8s_controllers_slave]
+ctrl-02 ansible_host=192.168.101.12
+ctrl-03 ansible_host=192.168.101.13
+
 [k8s_workers]
+wrk-01 ansible_host=192.168.101.21
+wrk-02 ansible_host=192.168.101.22
+
+[k8s_nodes]
+ctrl-01 ansible_host=192.168.101.11
+ctrl-02 ansible_host=192.168.101.12
+ctrl-03 ansible_host=192.168.101.13
 wrk-01 ansible_host=192.168.101.21
 wrk-02 ansible_host=192.168.101.22
