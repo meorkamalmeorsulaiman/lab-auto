@@ -1,0 +1,46 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for deploy-vm
+
+- name: Creating virtual machines
+  proxmox_kvm:
+    api_user: "{{ proxmox_user }}"
+    api_token_id: "{{ proxmox_token_id }}"
+    api_token_secret: "{{ proxmox_token_secret }}"
+    api_host: "{{ ansible_host }}"
+    node: "{{ proxmox_node }}"
+    clone: "{{ clone_source }}"
+    vmid: "{{ clone_source_id }}"
+    name: "{{ item.name }}"
+    newid: "{{ item.vm_id }}"
+    timeout: "{{ task_timeout }}"
+  loop: "{{ virtual_machines }}"
+
+- name: Setting up virtual machine
+  proxmox_kvm:
+    api_user: "{{ proxmox_user }}"
+    api_token_id: "{{ proxmox_token_id }}"
+    api_token_secret: "{{ proxmox_token_secret }}"
+    api_host: "{{ ansible_host }}"
+    node: "{{ proxmox_node }}"
+    vmid: "{{ item.vm_id }}"
+    name: "{{ item.name }}"
+    ipconfig: 
+      ipconfig0: "ip={{ item.vm_ip_address }}/24,gw={{ gateway }}"
+    update: true
+    timeout: "{{ task_timeout }}"
+  loop: "{{ virtual_machines }}"
+
+- name: Starting up virtual machines
+  proxmox_kvm:
+    api_user: "{{ proxmox_user }}"
+    api_token_id: "{{ proxmox_token_id }}"
+    api_token_secret: "{{ proxmox_token_secret }}"
+    api_host: "{{ ansible_host }}"
+    node: "{{ proxmox_node }}"
+    vmid: "{{ item.vm_id }}"
+    name: "{{ item.name }}"
+    timeout: "{{ task_timeout }}"
+    state: started
+  loop: "{{ virtual_machines }}"
+  when: item.start == true

@@ -1,35 +1,35 @@
 ---
+proxmox_node: prox02
 virtual_machines:
-  JNKN-01:
+  - name: JNKN-01
     vm_id: 102
-    vm_name: JNKN-01
     vm_ip_address: 192.168.101.250
-  EVE-01:
+    start: false
+  - name: EVE-01
     vm_id: 103
-    vm_name: EVE-01
     vm_ip_address: 192.168.101.253
-  JNKN-AGNT-01:
+    start: false
+  - name: JNKN-AGNT-01
     vm_id: 104
-    vm_name: JNKN-AGNT-01
     vm_ip_address: 192.168.101.249
-  CTRL-01:
+    start: false
+  - name: CTRL-01
     vm_id: 105
-    vm_name: CTRL-01
     vm_ip_address: 192.168.101.11
-  CTRL-02:
+    start: true
+  - name: CTRL-02
     vm_id: 106
-    vm_name: CTRL-02
     vm_ip_address: 192.168.101.12
-  CTRL-03:
+    start: true
+  - name: CTRL-03
     vm_id: 107
-    vm_name: CTRL-03
     vm_ip_address: 192.168.101.13
-  WRK-01:
+    start: true
+  - name: WRK-01
     vm_id: 108
-    vm_name: WRK-01
     vm_ip_address: 192.168.101.21
-  WRK-02:
+    start: false
+  - name: WRK-02
     vm_id: 109
-    vm_name: WRK-02
     vm_ip_address: 192.168.101.22
-
+    start: false
