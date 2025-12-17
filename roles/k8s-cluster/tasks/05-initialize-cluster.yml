@@ -1,0 +1,86 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for k8s-cluster
+
+- name: Getting VIP for HA Cluster 
+  set_fact:
+    cluster_vip: >-
+      {{  keepalived | selectattr('name', 'equalto', 'k8s_ha_cluster') | map(attribute='vip') | first }}
+
+- name: Confirming VIP for HA Cluster
+  debug:
+    msg: "This will be the cluster VIP: {{ cluster_vip }}"
+
+- name: Check if cluster has been initizlized
+  become: yes
+  become_user: "{{ ansible_user }}"
+  command: kubectl get nodes
+  register: kubectl_get_nodes_output
+  failed_when: False
+
+- name: Initialize Kubernetes cluster
+  command: kubeadm init --control-plane-endpoint "{{ cluster_vip }}:6443" --upload-certs
+  when: kubectl_get_nodes_output.rc !=0
+
+- name: Create kubeconfig directory
+  file:
+    path: /home/{{ ansible_user }}/.kube
+    state: directory
+    mode: '0755'
+    owner: "{{ ansible_user }}"
+
+- name: Copy kubeconfig
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest: /home/{{ ansible_user }}/.kube/config
+    owner: "{{ ansible_user }}"
+    mode: '0644'
+    remote_src: yes
+
+- name: Set ownership for kubeconfig config file 
+  file:
+    path: /home/{{ ansible_user }}/.kube/config
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0644'
+
+- name: Check if CNI plugin installed
+  stat:
+    path: /etc/cni/net.d/calico-kubeconfig
+  register: config_file_check
+
+- name: Setting up network plugin
+  become: false
+  command:  
+    cmd: kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+  when: not config_file_check.stat.exists
+
+- name: Getting worker join token
+  command: kubeadm token create --print-join-command
+  register: worker_join_command
+
+- name: Creating worker join command script
+  become: false
+  copy:
+    content: "sudo {{ worker_join_command.stdout }}"
+    dest: /tmp/worker-join-command.sh
+    mode: '0755'
+  delegate_to: localhost
+
+- name: Getting control join certificate key
+  shell: |
+    kubeadm init phase upload-certs --upload-certs \
+    | awk '/key:/{getline; print}'
+  register: control_join_key
+
+- name: Display key 
+  debug:
+    msg: "{{ control_join_key.stdout }}"
+
+- name: Creating control plane join command 
+  become: false
+  copy: 
+    content: "sudo {{ worker_join_command.stdout }} --control-plane --certificate-key {{ control_join_key.stdout }}"
+    dest: /tmp/control-join-command.sh
+    mode: '0755'
+  delegate_to: localhost
