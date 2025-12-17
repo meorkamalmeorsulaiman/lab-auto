@@ -14,3 +14,7 @@
 - name: Setting up controller
   include_tasks: '04-setup-controller.yml'
   when: "'k8s_controllers' in group_names"
+
+- name: Initilize cluster on master node
+  include_tasks: '05-initialize-cluster.yml'
+  when: inventory_hostname == 'ctrl-01'

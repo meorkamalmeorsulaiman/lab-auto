@@ -2,6 +2,15 @@
 ---
 # tasks file for k8s-cluster
 
+- name: Getting VIP for HA Cluster 
+  set_fact:
+    cluster_vip: >-
+      {{  keepalived | selectattr('name', 'equalto', 'k8s_ha_cluster') | map(attribute='vip') | first }}
+
+- name: Confirming VIP for HA Cluster
+  debug:
+    msg: "This will be the cluster VIP: {{ cluster_vip }}"
+
 - name: Check if cluster has been initizlized
   become: yes
   become_user: "{{ ansible_user }}"
@@ -10,20 +19,30 @@
   failed_when: False
 
 - name: Initialize Kubernetes cluster
-  command: kubeadm init --control-plane-endpoint "[VIP]:6443" --upload-certs
+  command: kubeadm init --control-plane-endpoint "{{ cluster_vip }}:6443" --upload-certs
   when: kubectl_get_nodes_output.rc !=0
 
-- name: Check if network plugin installed
-  stat:
-    path: /etc/cni/net.d/calico-kubeconfig
-  register: config_file_check
+- name: Create kubeconfig directory
+  file:
+    path: /home/{{ ansible_user }}/.kube
+    state: directory
+    mode: '0755'
+    owner: "{{ ansible_user }}"
 
-- name: Setting up network plugin
-  become: yes
-  become_user: "{{ ansible_user }}"
-  command:  
-    cmd: kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
-  when: not config_file_check.stat.exists
+- name: Copy kubeconfig
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest: /home/{{ ansible_user }}/.kube/config
+    owner: "{{ ansible_user }}"
+    mode: '0644'
+    remote_src: yes
+
+- name: Set ownership for kubeconfig config file 
+  file:
+    path: /home/{{ ansible_user }}/.kube/config
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0644'
 
 - name: Getting join token
   command: kubeadm token create --print-join-command
