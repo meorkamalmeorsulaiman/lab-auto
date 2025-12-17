@@ -1,38 +1,141 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+This role deploy Kubernetes HA Cluster.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Hosts ubuntu and SSH enabled, role tested on ubuntu 24 sudo passwordless with user `ansible` required. 
+
+### Hosts
+- Groups:
+  - k8s_nodes
+    - All K8s nodes
+  - k8s_controllers
+    - All K8s control nodes
+  - k8s_controllers_master
+    - K8s control node that initialize the cluster (master)
+  - k8s_controllers_slave
+    - K8s control node that act as standby node (slave)
+  - k8s_workers
+    - All K8s worker nodes 
+
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Variables that should be specified
+
+### Group variables - `k8s_nodes.yml`
+- Use to specify cluster wide settings:
+  - Kubernetes version
+  - Containerd version
+  - Runc version
+
+```
+---
+containerd_version: x.x.x
+runc_version: x.x.x
+k8s_version: x.x
+```
+
+### Host variables `HOSTNAME.yml`
+- Use to specify:
+  - Keepalived:
+    - State
+    - Priority
+    - Interface name
+    - VRRP Instance
+  - HAProxy settings:
+    - Name for frontend and backend section
+    - List of backend serves
+```
+---
+keepalived:
+  - name: INSTANCE-NAME
+    if_name: INTERFACE-NAME
+    vip: X.X.X.X
+    state: MASTER or SLAVE
+    priority: [0 - 255]
+
+haproxy:
+  - name: NAME
+    backend_servers: 
+      - X.X.X.X
+      - X.X.X.X
+```
+
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Example playbook to use this role
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```
+---
+- name: Deploying Kubernetes HA Cluster
+  hosts: k8s_nodes
+  become: true
+  gather_facts: false
+  roles:
+    - roles/k8s-cluster
+```
 
-License
--------
+Several playbooks included in this role
+```
+ansible@ANS-CTRL:~/lab-auto/roles/k8s-cluster/tasks$ ls
+01-set-kernel.yml   03-install-kubetools.yml  05-initialize-cluster.yml  main.yml
+02-install-cri.yml  04-setup-controller.yml   06-control-join.yml
+```
 
-BSD
+`main.yml` run the individual playbooks
+
+```
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for k8s-cluster
+
+- name: Setting up kernel
+  include_tasks: '01-set-kernel.yml'
+
+- name: Installing Container runtime
+  include_tasks: '02-install-cri.yml'
+
+- name: Installing Kubetools
+  include_tasks: '03-install-kubetools.yml'
+
+- name: Setting up controller
+  include_tasks: '04-setup-controller.yml'
+  when: 
+    - "'k8s_controllers' in group_names"
+
+- name: Initilize cluster on master node
+  include_tasks: '05-initialize-cluster.yml'
+  when: "'k8s_controllers_master' in group_names"
+
+- name: Copy control join script to control nodes
+  copy: 
+    src: /tmp/control-join-command.sh 
+    dest: /tmp
+    mode: '0755'
+  when: "'k8s_controllers_slave' in group_names"
+
+- name: Copy worker join script to worker nodes 
+  copy: 
+    src: /tmp/worker-join-command.sh 
+    dest: /tmp 
+    mode: '0755'
+  when: "'k8s_workers' in group_names"
+```
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Meor Muhammad Kamal, 
+Network engineer CCIE #69681
