@@ -67,3 +67,20 @@
     mode: '0755'
   delegate_to: localhost
 
+- name: Getting control join certificate key
+  shell: |
+    kubeadm init phase upload-certs --upload-certs \
+    | awk '/key:/{getline; print}'
+  register: control_join_key
+
+- name: Display key 
+  debug:
+    msg: "{{ control_join_key.stdout }}"
+
+- name: Creating control plane join command 
+  become: false
+  copy: 
+    content: "{{ worker_join_command.stdout }} --control-plane --certificate-key {{ control_join_key.stdout }}"
+    dest: /tmp/control-join-command.sh
+    mode: '0755'
+  delegate_to: localhost

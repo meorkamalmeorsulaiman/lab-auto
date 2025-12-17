@@ -19,3 +19,6 @@
 - name: Initilize cluster on master node
   include_tasks: '05-initialize-cluster.yml'
   when: "'k8s_controllers_master' in group_names"
+
+- name: Setting up nodes for joining cluster
+  include_tasks: '06-join-cluster.yml'
