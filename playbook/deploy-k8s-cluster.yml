@@ -1,6 +1,6 @@
 ---
 - name: Deploying VMs
-  hosts: k8s_nodes
+  hosts: ctrl-01
   become: true
   gather_facts: false
   roles:

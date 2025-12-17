@@ -1,6 +1,11 @@
 ---
-k8s_cluster:
-  if_name: eth0
-  vip: 192.168.101.10
-  state: MASTER
-  priority: 255
+keepalived:
+  - name: k8s_ha_cluster
+    if_name: eth0
+    vip: 192.168.101.10
+    state: MASTER
+    priority: 255
+
+haproxy:
+  - name: k8s_ha_cluster
+    frontend: test_frontend
