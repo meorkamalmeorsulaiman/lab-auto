@@ -4,17 +4,17 @@
 
 - name: Download containerd binaries
   get_url:
-    url:  https://github.com/containerd/containerd/releases/download/v{{ CONTAINERD_VERSION }}/containerd-{{ CONTAINERD_VERSION }}-linux-amd64.tar.gz
+    url:  https://github.com/containerd/containerd/releases/download/v{{ containerd_version}}/containerd-{{ containerd_version}}-linux-amd64.tar.gz
     dest: /tmp
 
 - name: Setting up directory for extracting binaries
   file:
-    path: /tmp/containerd-{{ CONTAINERD_VERSION }}
+    path: /tmp/containerd-{{ containerd_version}}
     state: directory
 
 - name: Extracting and setting up binaries 
   unarchive:
-    src: /tmp/containerd-{{ CONTAINERD_VERSION }}-linux-amd64.tar.gz
+    src: /tmp/containerd-{{ containerd_version}}-linux-amd64.tar.gz
     dest:  /usr/local
     remote_src: yes
 
@@ -51,7 +51,7 @@
 
 - name: Downloading runc binaries
   get_url:
-    url: https://github.com/opencontainers/runc/releases/download/v{{ RUNC_VERSION }}/runc.amd64
+    url: https://github.com/opencontainers/runc/releases/download/v{{ runc_version }}/runc.amd64
     dest: /tmp
 
 - name: Setting up runc 

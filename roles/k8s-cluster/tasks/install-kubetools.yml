@@ -1,13 +1,13 @@
 ---
 - name: Download signing key 
   shell:
-    cmd: "curl -fsSL https://pkgs.k8s.io/core:/stable:/v{{ K8S_VERSION }}/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg"
+    cmd: "curl -fsSL https://pkgs.k8s.io/core:/stable:/v{{ k8s_version }}/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg"
   args:
     creates: /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 
 - name: Setting up repository 
   apt_repository:
-    repo: "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v{{ K8S_VERSION }}/deb/ /"
+    repo: "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v{{ k8s_version }}/deb/ /"
     filename: kubernetes
     state: present
     update_cache: yes

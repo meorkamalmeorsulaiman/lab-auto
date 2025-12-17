@@ -1,4 +1,4 @@
 ---
-CONTAINERD_VERSION: 2.2.0
-RUNC_VERSION: 1.4.0
-K8S_VERSION: 1.34
+containerd_version: 2.2.0
+runc_version: 1.4.0
+k8s_version: 1.34
