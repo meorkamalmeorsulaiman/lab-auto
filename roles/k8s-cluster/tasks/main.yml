@@ -20,5 +20,20 @@
   include_tasks: '05-initialize-cluster.yml'
   when: "'k8s_controllers_master' in group_names"
 
-- name: Setting up nodes for joining cluster
-  include_tasks: '06-join-cluster.yml'
+- name: Copy control join script to control nodes
+  copy: 
+    src: /tmp/control-join-command.sh 
+    dest: /tmp
+    mode: '0755'
+  when: "'k8s_controllers_slave' in group_names"
+
+- name: Copy worker join script to worker nodes 
+  copy: 
+    src: /tmp/worker-join-command.sh 
+    dest: /tmp 
+    mode: '0755'
+  when: "'k8s_workers' in group_names"
+
+- name: Join control node into cluster 
+  include_tasks: '06-control-join.yml'
+  when: "'k8s_controllers_slave' in group_names"
