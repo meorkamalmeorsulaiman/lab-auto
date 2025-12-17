@@ -33,7 +33,3 @@ virtual_machines:
     vm_id: 109
     vm_ip_address: 192.168.101.22
     start: false
-  - name: TEST-01
-    vm_id: 110
-    vm_ip_address: 192.168.101.110
-    start: false
