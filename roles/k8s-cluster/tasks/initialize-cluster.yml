@@ -13,3 +13,8 @@
   template:
     src: keepalived.conf.j2
     dest: /tmp/keepalived.conf
+
+- name: Setting up haproxy config file 
+  template:
+    src: haproxy.cfg.j2 
+    dest: /tmp/haproxy.cfg

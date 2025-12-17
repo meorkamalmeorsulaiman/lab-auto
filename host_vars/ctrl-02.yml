@@ -7,5 +7,8 @@ keepalived:
     priority: 254
 
 haproxy:
-  - name: k8s_ha_cluster
-    frontend: test_frontend
+  - name: apiserver
+    backend_servers: 
+      - 192.168.101.11
+      - 192.168.101.12
+      - 192.168.101.13
