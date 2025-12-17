@@ -11,6 +11,6 @@
 - name: Installing Kubetools
   include_tasks: 'install-kubetools.yml'
 
-- name: Setting up HA cluster
-  include_tasks: 'initialize-cluster.yml'
+- name: Setting up controller
+  include_tasks: 'setup-controller.yml'
   when: "'k8s_controllers' in group_names"
