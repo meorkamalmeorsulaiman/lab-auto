@@ -1,5 +1,5 @@
 ---
-- name: Deploying VMs
+- name: Deploying Kubernetes HA Cluster
   hosts: k8s_nodes
   become: true
   gather_facts: false
