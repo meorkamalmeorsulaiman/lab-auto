@@ -62,7 +62,7 @@
 - name: Creating worker join command script
   become: false
   copy:
-    content: "{{ worker_join_command.stdout }}"
+    content: "sudo {{ worker_join_command.stdout }}"
     dest: /tmp/worker-join-command.sh
     mode: '0755'
   delegate_to: localhost
@@ -80,7 +80,7 @@
 - name: Creating control plane join command 
   become: false
   copy: 
-    content: "{{ worker_join_command.stdout }} --control-plane --certificate-key {{ control_join_key.stdout }}"
+    content: "sudo {{ worker_join_command.stdout }} --control-plane --certificate-key {{ control_join_key.stdout }}"
     dest: /tmp/control-join-command.sh
     mode: '0755'
   delegate_to: localhost
