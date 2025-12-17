@@ -3,14 +3,14 @@
 # tasks file for k8s-cluster
 
 - name: Setting up kernel
-  include_tasks: 'set-kernel.yml'
+  include_tasks: '01-set-kernel.yml'
 
 - name: Installing Container runtime
-  include_tasks: 'install-cri.yml'
+  include_tasks: '02-install-cri.yml'
 
 - name: Installing Kubetools
-  include_tasks: 'install-kubetools.yml'
+  include_tasks: '03-install-kubetools.yml'
 
 - name: Setting up controller
-  include_tasks: 'setup-controller.yml'
+  include_tasks: '04-setup-controller.yml'
   when: "'k8s_controllers' in group_names"

@@ -1,0 +1,34 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for k8s-cluster
+
+- name: Check if cluster has been initizlized
+  become: yes
+  become_user: "{{ ansible_user }}"
+  command: kubectl get nodes
+  register: kubectl_get_nodes_output
+  failed_when: False
+
+- name: Initialize Kubernetes cluster
+  command: kubeadm init --control-plane-endpoint "[VIP]:6443" --upload-certs
+  when: kubectl_get_nodes_output.rc !=0
+
+- name: Check if network plugin installed
+  stat:
+    path: /etc/cni/net.d/calico-kubeconfig
+  register: config_file_check
+
+- name: Setting up network plugin
+  become: yes
+  become_user: "{{ ansible_user }}"
+  command:  
+    cmd: kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+  when: not config_file_check.stat.exists
+
+- name: Getting join token
+  command: kubeadm token create --print-join-command
+  register: result_var
+
+- name: Run below command on worker nodes
+  debug:
+    msg: "{{ result_var.stdout }}"
