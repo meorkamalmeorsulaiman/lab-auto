@@ -1,3 +1,17 @@
 #SPDX-License-Identifier: MIT-0
 ---
 # tasks file for deploy-vm
+
+- name: Creating virtual machines
+  proxmox_kvm:
+    api_user: "{{ proxmox_user }}"
+    api_token_id: "{{ proxmox_token_id }}"
+    api_token_secret: "{{ proxmox_token_secret }}"
+    api_host: "{{ ansible_host }}"
+    node: "{{ ansible_host }}"
+    clone: "{{ clone_source }}"
+    vmid: "{{ clone_source_id }}"
+    name: "{{ item.name }}"
+    newid: "{{ item.vm_id }}"
+    timeout: "{{ task_timeout }}"
+  loop: "{{ virtual_machines }}"
