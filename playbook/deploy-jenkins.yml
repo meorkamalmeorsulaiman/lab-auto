@@ -1,5 +1,5 @@
 - name: Deploying Jenskins Controller
-  hosts: jnkn-02
+  hosts: jnkn-01
   become: true
   gather_facts: false
   roles:
