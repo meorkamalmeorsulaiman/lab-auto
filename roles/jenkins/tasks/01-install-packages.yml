@@ -1,0 +1,35 @@
+- name: Download signing key 
+  shell:
+    cmd: "wget -O /etc/apt/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key"
+  args:
+    creates: /etc/apt/keyrings/jenkins-keyring.asc
+
+- name: Setting up repository 
+  apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/"
+    filename: jenkins.list
+    state: present
+    update_cache: yes
+
+- name: Installing Java
+  apt:
+    pkg:
+      - fontconfig
+      - openjdk-21-jre
+      - git
+    update_cache: yes
+
+- name: Installing Jenkins
+  apt:
+    pkg:
+      - jenkins
+    update_cache: yes
+
+- name: Getting worker join token
+  shell:
+    cmd: "cat /var/lib/jenkins/secrets/initialAdminPassword"
+  register: initial_password
+
+- name: Initial password 
+  debug:
+    msg: "This is the initial password {{ initial_password.stdout }}"

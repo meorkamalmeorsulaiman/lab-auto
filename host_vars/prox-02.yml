@@ -16,15 +16,15 @@ virtual_machines:
   - name: CTRL-01
     vm_id: 105
     vm_ip_address: 192.168.101.11
-    start: true
+    start: false
   - name: CTRL-02
     vm_id: 106
     vm_ip_address: 192.168.101.12
-    start: true
+    start: false
   - name: CTRL-03
     vm_id: 107
     vm_ip_address: 192.168.101.13
-    start: true
+    start: false
   - name: WRK-01
     vm_id: 108
     vm_ip_address: 192.168.101.21
