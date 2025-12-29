@@ -25,7 +25,7 @@
       - jenkins
     update_cache: yes
 
-- name: Getting worker join token
+- name: Getting initial password
   shell:
     cmd: "cat /var/lib/jenkins/secrets/initialAdminPassword"
   register: initial_password

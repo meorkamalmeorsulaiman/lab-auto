@@ -2,5 +2,10 @@
 ---
 # tasks file for jenkins
 
-- name: Installing packages
-  include_tasks: '01-install-packages.yml'
+- name: Setting up Controller
+  include_tasks: '01-setup-controller.yml'
+  when: "'jenkins_controllers' in group_names"
+
+- name: Setting up Agents
+  include_tasks: '02-setup-agent.yml'
+  when: "'jenkins_agents' in group_names"
