@@ -33,7 +33,3 @@ virtual_machines:
     vm_id: 109
     vm_ip_address: 192.168.101.22
     start: false
-  - name: JNKN-02
-    vm_id: 110
-    vm_ip_address: 192.168.101.248
-    start: false
