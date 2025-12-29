@@ -1,8 +1,15 @@
 [proxmox]
 prox-02 ansible_host=192.168.101.254
 
-[jenkins]
+[jenkins_controllers]
 jnkn-01 ansible_host=192.168.101.250
+
+[jenkins_agents]
+jnkn-agnt-01 ansible_host=192.168.101.249
+
+[jenkins_nodes]
+jnkn-01 ansible_host=192.168.101.250
+jnkn-agnt-01 ansible_host=192.168.101.249
 
 [k8s_controllers]
 ctrl-01 ansible_host=192.168.101.11
