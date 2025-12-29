@@ -18,3 +18,18 @@
       - openjdk-21-jre
       - git
     update_cache: yes
+
+- name: Installing Jenkins
+  apt:
+    pkg:
+      - jenkins
+    update_cache: yes
+
+- name: Getting worker join token
+  shell:
+    cmd: "cat /var/lib/jenkins/secrets/initialAdminPassword"
+  register: initial_password
+
+- name: Initial password 
+  debug:
+    msg: "This is the initial password {{ initial_password.stdout }}"
