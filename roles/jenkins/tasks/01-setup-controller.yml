@@ -25,11 +25,18 @@
       - jenkins
     update_cache: yes
 
+- name: Check if initial password exist
+  stat:
+    path: /var/lib/jenkins/secrets/initialAdminPassword
+  register: config_file_status
+
 - name: Getting initial password
   shell:
     cmd: "cat /var/lib/jenkins/secrets/initialAdminPassword"
   register: initial_password
+  when: config_file_status.stat.exists
 
 - name: Initial password 
   debug:
     msg: "This is the initial password {{ initial_password.stdout }}"
+  when: config_file_status.stat.exists
