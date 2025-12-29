@@ -1,0 +1,6 @@
+- name: Deploying Jenskins Controller
+  hosts: jnkn-02
+  become: true
+  gather_facts: false
+  roles:
+    - roles/jenkins

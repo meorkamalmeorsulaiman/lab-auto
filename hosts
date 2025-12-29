@@ -1,8 +1,8 @@
 [proxmox]
 prox-02 ansible_host=192.168.101.254
 
-[vm_template]
-192.168.101.252
+[jenkins]
+jnkn-02 ansible_host=192.168.101.248
 
 [k8s_controllers]
 ctrl-01 ansible_host=192.168.101.11
