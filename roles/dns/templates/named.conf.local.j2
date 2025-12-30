@@ -1,0 +1,25 @@
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+
+{% for forward in forward_zones %}
+
+zone "{{ forward.name }}" IN {
+        type primary;
+        file "/etc/bind/forward.{{ forward.name }}";
+        allow-update { none; };
+};
+{% endfor %}
+
+{% for reverse in reverse_zones %}
+zone "{{ reverse.ptr }}.in-addr.arpa" IN {
+        type primary;
+        file "/etc/bind/reverse.{{ reverse.name }}";
+        allow-update { none; };
+};
+{% endfor %}

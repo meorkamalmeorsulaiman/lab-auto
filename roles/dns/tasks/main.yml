@@ -1,0 +1,21 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for dns
+
+- name: Setting up DNS Name Server
+  include_tasks: '01-setup-bind9.yml'
+  when: nameserver | bool
+
+- name: Setting up Forward Zones 
+  include_tasks: '02-setup-forward-zones.yml'
+  when: "'dns_forward_zones' in group_names"
+
+- name: Setting up Reverse Zones 
+  include_tasks: '03-setup-reverse-zone.yml'
+  when: "'dns_reverse_zone' in group_names"
+
+- name: Reloading bind9 to apply changes
+  systemd_service:
+    name: named 
+    state: reloaded 
+  when: nameserver | bool

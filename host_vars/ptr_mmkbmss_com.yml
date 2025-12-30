@@ -1,0 +1,10 @@
+records:
+  - name: lab.mmkbmss.com
+    ptr: 101.168.192
+    nameserver: ns1
+    nameserver_ip: 192.168.101.248
+    reverse_records:
+      - name: ns1 
+        ip: 248
+      - name: jenkins
+        ip: 250

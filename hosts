@@ -1,6 +1,19 @@
 [proxmox]
 prox-02 ansible_host=192.168.101.254
 
+[dns_forward_zones]
+lab_mmkbmss_com ansible_host=192.168.101.248
+int_mmkbmss_com ansible_host=192.168.101.248
+
+[dns_reverse_zone]
+ptr_mmkbmss_com ansible_host=192.168.101.248
+
+[dns]
+dns-01 ansible_host=192.168.101.248 nameserver=true
+lab_mmkbmss_com ansible_host=192.168.101.248 nameserver=false
+int_mmkbmss_com ansible_host=192.168.101.248 nameserver=false
+ptr_mmkbmss_com ansible_host=192.168.101.248 nameserver=false
+
 [jenkins_controllers]
 jnkn-01 ansible_host=192.168.101.250
 
