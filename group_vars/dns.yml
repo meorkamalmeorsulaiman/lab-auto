@@ -1,6 +1,6 @@
 ---
 reverse_zones: 
-  - name: mmkbmss.com
+  - name: lab.mmkbmss.com
     ptr: 101.168.192
 forward_zones:
   - name: lab.mmkbmss.com

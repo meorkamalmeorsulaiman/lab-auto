@@ -1,0 +1,8 @@
+records:
+  - name: lab.mmkbmss.com
+    nameserver: ns1
+    reverse_records:
+      - name: ns1 
+        ip: 248
+      - name: jenkins
+        ip: 250
