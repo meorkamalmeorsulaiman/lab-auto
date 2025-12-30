@@ -6,7 +6,7 @@ pipeline {
     }
 
     parameters {
-		choice (name: 'JOB_TYPE', choices: ['create-vm', 'deploy-k8s', 'deploy-k8s-ha-cluster'], description: 'Select deployment type')
+		choice (name: 'JOB_TYPE', choices: ['create-vm', 'deploy-k8s', 'deploy-k8s-ha-cluster', 'deploy-dns'], description: 'Select deployment type')
     }
 
     stages {
@@ -18,6 +18,19 @@ pipeline {
 				echo "*** Creating virtual machine ***"
 				maskPasswords(varPasswordPairs: [[var: '${env.PROX_TOKEN_ID}']], varMaskRegexes: []) {
 					sh "ansible-playbook playbook/create-vm.yml -e \'api_token_secret=${env.PROX_TOKEN_ID}\'"
+				}
+				echo '*** Virtual machine provisioned ***'
+				echo '*** Proceed to login via SSH ***'
+            }
+        }
+        stage('Deploying DNS') {
+	    when {
+			expression {params.JOB_TYPE == 'deploy-dns'}
+	    }
+            steps {
+				echo "*** Creating virtual machine ***"
+				maskPasswords(varPasswordPairs: [[var: '${env.PROX_TOKEN_ID}']], varMaskRegexes: []) {
+					sh "ansible-playbook playbook/deploy-dns.yml -e \'api_token_secret=${env.PROX_TOKEN_ID}\'"
 				}
 				echo '*** Virtual machine provisioned ***'
 				echo '*** Proceed to login via SSH ***'
