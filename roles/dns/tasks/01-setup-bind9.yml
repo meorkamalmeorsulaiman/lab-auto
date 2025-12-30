@@ -19,19 +19,3 @@
     dest: /etc/bind
     mode: '0644'
     group: bind
-
-- name: Setting up forward records
-  template:
-    src: forward.j2
-    dest: /etc/bind/forward.{{ item.name }}
-    mode: '0644'
-    group: bind
-  loop: "{{ zones }}"
-
-- name: Setting up reverse records
-  template:
-    src: reverse.j2
-    dest: /etc/bind/reverse.{{ item.name }}
-    mode: '0644'
-    group: bind
-  loop: "{{ zones }}"
