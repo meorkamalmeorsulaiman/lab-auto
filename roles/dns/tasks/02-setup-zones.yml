@@ -7,10 +7,10 @@
     group: bind
   loop: "{{ records }}"
 
-- name: Setting up reverse records
-  template:
-    src: reverse.j2
-    dest: /etc/bind/reverse.{{ item.name }}
-    mode: '0644'
-    group: bind
-  loop: "{{ records }}"
+# - name: Setting up reverse records
+#   template:
+#     src: reverse.j2
+#     dest: /etc/bind/reverse.{{ item.name }}
+#     mode: '0644'
+#     group: bind
+#   loop: "{{ records }}"

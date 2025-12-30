@@ -7,16 +7,19 @@
 //include "/etc/bind/zones.rfc1918";
 
 
-{% for zone in zones %}
+{% for forward in forward_zones %}
 
-zone "{{ zone.name }}" IN {
+zone "{{ forward.name }}" IN {
         type master;
         file "/etc/bind/forward.{{ zone.name }}";
         allow-update { none; };
 };
-zone "{{ zone.ptr }}.in-addr.arpa" IN {
+{% endfor %}
+
+{% for reverse in reverse_zones %}
+zone "{{ reverse.ptr }}.in-addr.arpa" IN {
         type master;
-        file "/etc/bind/reverse.{{ zone.name }}";
+        file "/etc/bind/reverse.{{ reverse.name }}";
         allow-update { none; };
 };
 {% endfor %}

@@ -1,7 +1,6 @@
 records:
   - name: lab.mmkbmss.com
     nameserver: ns1
-    ptr: 101.168.192
     forward_records:
       - name: ns1
         ip: 192.168.101.248
