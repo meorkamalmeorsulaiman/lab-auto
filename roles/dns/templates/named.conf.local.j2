@@ -11,7 +11,7 @@
 
 zone "{{ forward.name }}" IN {
         type master;
-        file "/etc/bind/forward.{{ zone.name }}";
+        file "/etc/bind/forward.{{ forward.name }}";
         allow-update { none; };
 };
 {% endfor %}
