@@ -9,3 +9,9 @@
 - name: Setting up Zones 
   include_tasks: '02-setup-zones.yml'
   when: "'dns_zones' in group_names"
+
+- name: Reloading bind9 to apply changes
+  systemd_service:
+    name: named 
+    stated: reloaded 
+  when: nameserver | bool
