@@ -6,7 +6,7 @@
       - dnsutils
     update_cache: yes
 
-- name: Setting up zone file
+- name: Setting up config file
   template:
     src: named.conf.local.j2
     dest: /etc/bind/named.conf.local
@@ -19,3 +19,11 @@
     dest: /etc/bind
     mode: '0644'
     group: bind
+
+- name: Setting up forward zone files
+  template:
+    src: forward.j2
+    dest: /etc/bind/forward."{{ item.name }}"
+    mode: '0644'
+    group: bind
+  loop: "{{ zones }}"
