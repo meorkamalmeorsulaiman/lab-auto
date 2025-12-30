@@ -13,5 +13,5 @@
 - name: Reloading bind9 to apply changes
   systemd_service:
     name: named 
-    stated: reloaded 
+    state: reloaded 
   when: nameserver | bool
