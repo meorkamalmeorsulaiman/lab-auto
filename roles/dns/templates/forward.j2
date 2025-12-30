@@ -4,14 +4,17 @@
 ; Instead, copy it, edit named.conf, and use that copy.
 ;
 $TTL    86400
-@       IN      SOA     localhost. root.localhost. (
+{% for zone in zones %}
+@       IN      SOA     {{ zone.name }}. root.{{ zone.name }}. (
+
                               1         ; Serial
                          604800         ; Refresh
                           86400         ; Retry
                         2419200         ; Expire
                           86400 )       ; Negative Cache TTL
 ;
-@       IN      NS      localhost.
-{% for record in forward_records %}
+@       IN      NS      {{ zone.nameserver }}.{{ zone.name }}.
+{% for record in zone.forward_records %}
 {{ record.name }}   IN  {{ record.type }}   {{ record.ip }}
+{% endfor %}
 {% endfor %}

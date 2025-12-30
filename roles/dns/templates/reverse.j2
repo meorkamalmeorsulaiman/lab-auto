@@ -1,0 +1,17 @@
+;
+; BIND reverse data file for local loopback interface
+;
+$TTL    604800
+{% for zone in zones %}
+@       IN      SOA     {{ zone.name }}. root.{{ zone.name }} (
+                              1         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      {{ zone.nameserver }}.{{ zone.name }}.
+{% for record in zone.reverse_records %}
+{{ record.ip }}   IN  PTR   {{ record.name }}.{{ zone.name }}
+{% endfor %}
+{% endfor %}

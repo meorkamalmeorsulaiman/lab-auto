@@ -1,6 +1,31 @@
----
 zones:
   - name: lab.mmkbmss.com
+    nameserver: ns1
     ptr: 101.168.192
+    forward_records:
+      - name: ns1
+        ip: 192.168.101.248
+        type: A
+      - name: jenkins
+        ip: 192.168.101.250
+        type: A
+    reverse_records:
+      - name: ns1 
+        ip: 248
+      - name: jenkins
+        ip: 250
   - name: int.mmkbmss.com
+    nameserver: ns1
     ptr: 101.168.192
+    forward_records:
+      - name: ns1
+        ip: 192.168.101.248
+        type: A
+      - name: jenkins
+        ip: 192.168.101.250
+        type: A
+    reverse_records:
+      - name: ns1 
+        ip: 248
+      - name: jenkins
+        ip: 250
