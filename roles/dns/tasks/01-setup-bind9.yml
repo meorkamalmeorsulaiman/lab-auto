@@ -1,0 +1,21 @@
+---
+- name: Installing bind9 and dns tools
+  apt:
+    pkg:
+      - bind9 
+      - dnsutils
+    update_cache: yes
+
+- name: Setting up config file
+  copy:
+    src: named.conf.local
+    dest: /etc/bind9
+    mode: '0744'
+    group: bind
+
+- name: Setting up config options file
+  copy:
+    src: named.conf.options
+    dest: /etc/bind9
+    mode: '0744'
+    group: bind
