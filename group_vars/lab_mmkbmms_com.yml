@@ -1,0 +1,11 @@
+a_records:
+  - name: ns1
+    ip: 192.168.101.248
+  - name: jenkins
+    ip: 192.168.101.250
+    
+ptr_records:
+  - name: ns1 
+    ip: 248
+  - name: jenkins
+    ip: 250

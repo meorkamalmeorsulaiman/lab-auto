@@ -7,15 +7,15 @@
     update_cache: yes
 
 - name: Setting up config file
-  copy:
-    src: named.conf.local
-    dest: /etc/bind
-    mode: '0744'
+  template:
+    src: named.conf.local.j2
+    dest: /etc/bind/named.conf.local
+    mode: '0644'
     group: bind
 
 - name: Setting up config options file
   copy:
     src: named.conf.options
     dest: /etc/bind
-    mode: '0744'
+    mode: '0644'
     group: bind

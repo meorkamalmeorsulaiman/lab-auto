@@ -1,0 +1,6 @@
+---
+zones:
+  - name: lab.mmkbmss.com
+    ptr: 101.168.192
+  - name: int.mmkbmss.com
+    ptr: 101.168.192
