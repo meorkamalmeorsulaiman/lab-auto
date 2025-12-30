@@ -11,7 +11,18 @@ Role tested on bind9.18.39 on Ubuntu 24.04.2
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Variables that should be specified
+
+### Group variables - `dns.yml`
+- Use to specify your zones:
+  - Reverse 
+  - Forward
+
+### Host variables `x_x_x_com.yml`
+- This should be zone specific variable
+  - List out the record within the zone
+  - Each domain has only one reverse zone
+
 
 Dependencies
 ------------
