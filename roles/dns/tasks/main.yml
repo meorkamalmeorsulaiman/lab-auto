@@ -1,3 +1,7 @@
 #SPDX-License-Identifier: MIT-0
 ---
 # tasks file for dns
+
+- name: Setting up DNS Name Server
+  include_tasks: '01-setup-bind9.yml'
+  when: "'dns' in group_names"

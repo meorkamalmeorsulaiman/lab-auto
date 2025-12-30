@@ -9,13 +9,13 @@
 - name: Setting up config file
   copy:
     src: named.conf.local
-    dest: /etc/bind9
+    dest: /etc/bind
     mode: '0744'
     group: bind
 
 - name: Setting up config options file
   copy:
     src: named.conf.options
-    dest: /etc/bind9
+    dest: /etc/bind
     mode: '0744'
     group: bind
