@@ -14,7 +14,7 @@ virtual_machines:
     vm_ip_address: 192.168.101.249
     start: false
   - name: DNS-01
-    vm_id: 104
+    vm_id: 105
     vm_ip_address: 192.168.101.248
     start: false
   - name: CTRL-01
