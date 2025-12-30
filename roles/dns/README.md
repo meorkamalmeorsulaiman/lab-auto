@@ -1,12 +1,12 @@
-Role Name
+DNS Deployment
 =========
 
-A brief description of the role goes here.
+This role is to deploy dns server using bind9. It support multiple forward zones
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Role tested on bind9.18.39 on Ubuntu 24.04.2
 
 Role Variables
 --------------
