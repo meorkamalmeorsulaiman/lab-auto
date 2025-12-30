@@ -10,7 +10,7 @@
 {% for forward in forward_zones %}
 
 zone "{{ forward.name }}" IN {
-        type master;
+        type primary;
         file "/etc/bind/forward.{{ forward.name }}";
         allow-update { none; };
 };
@@ -18,7 +18,7 @@ zone "{{ forward.name }}" IN {
 
 {% for reverse in reverse_zones %}
 zone "{{ reverse.ptr }}.in-addr.arpa" IN {
-        type master;
+        type primary;
         file "/etc/bind/reverse.{{ reverse.name }}";
         allow-update { none; };
 };

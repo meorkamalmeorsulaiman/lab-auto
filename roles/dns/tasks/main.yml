@@ -8,7 +8,7 @@
 
 - name: Setting up Forward Zones 
   include_tasks: '02-setup-forward-zones.yml'
-  when: "'dns_fowrward_zones' in group_names"
+  when: "'dns_forward_zones' in group_names"
 
 - name: Setting up Reverse Zones 
   include_tasks: '03-setup-reverse-zone.yml'

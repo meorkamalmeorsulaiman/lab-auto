@@ -1,8 +1,9 @@
 ;
-; BIND reverse data file for local loopback interface
+; BIND reverse data file for 192.168.101
 ;
 $TTL    604800
 {% for zone in records %}
+$ORIGIN {{ zone.ptr }}.in-addr.arpa.
 @       IN      SOA     {{ zone.name }}. root.{{ zone.name }} (
                               1         ; Serial
                          604800         ; Refresh
@@ -11,7 +12,8 @@ $TTL    604800
                          604800 )       ; Negative Cache TTL
 ;
 @       IN      NS      {{ zone.nameserver }}.{{ zone.name }}.
+{{ zone.nameserver }} IN  A {{ zone.nameserver_ip }}
 {% for record in zone.reverse_records %}
-{{ record.ip }}   IN  PTR   {{ record.name }}.{{ zone.name }}
+{{ record.ip }}   IN  PTR   {{ record.name }}.{{ zone.name }}.
 {% endfor %}
 {% endfor %}

@@ -1,7 +1,7 @@
 [proxmox]
 prox-02 ansible_host=192.168.101.254
 
-[dns_foward_zones]
+[dns_forward_zones]
 lab_mmkbmss_com ansible_host=192.168.101.248
 int_mmkbmss_com ansible_host=192.168.101.248
 
