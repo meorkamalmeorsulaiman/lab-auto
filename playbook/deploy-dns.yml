@@ -1,6 +1,6 @@
 - name: Deploying DNS Server
   hosts: dns
   become: true
-  gather_facts: true
+  gather_facts: false
   roles:
     - roles/dns

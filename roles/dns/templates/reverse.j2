@@ -2,7 +2,7 @@
 ; BIND reverse data file for local loopback interface
 ;
 $TTL    604800
-{% for zone in zones %}
+{% for zone in records %}
 @       IN      SOA     {{ zone.name }}. root.{{ zone.name }} (
                               1         ; Serial
                          604800         ; Refresh

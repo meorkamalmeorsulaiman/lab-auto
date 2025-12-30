@@ -4,4 +4,8 @@
 
 - name: Setting up DNS Name Server
   include_tasks: '01-setup-bind9.yml'
-  when: "'dns' in group_names"
+  when: nameserver | bool
+
+- name: Setting up Zones 
+  include_tasks: '02-setup-zones.yml'
+  when: "'dns_zones' in group_names"
