@@ -39,6 +39,7 @@ ctrl-03 ansible_host=192.168.101.13
 [k8s_workers]
 wrk-01 ansible_host=192.168.101.21
 wrk-02 ansible_host=192.168.101.22
+wrk-03 ansible_host=192.168.101.23
 
 [k8s_nodes]
 ctrl-01 ansible_host=192.168.101.11
@@ -46,3 +47,5 @@ ctrl-02 ansible_host=192.168.101.12
 ctrl-03 ansible_host=192.168.101.13
 wrk-01 ansible_host=192.168.101.21
 wrk-02 ansible_host=192.168.101.22
+wrk-03 ansible_host=192.168.101.23
+
