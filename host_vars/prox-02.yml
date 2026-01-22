@@ -21,6 +21,11 @@ virtual_machines:
     vm_ip_address: 192.168.101.248
     start: false
     delete: false
+  - name: STRG-01
+    vm_id: 106
+    vm_ip_address: 192.168.101.247
+    start: false
+    delete: false
   - name: CTRL-01
     vm_id: 111
     vm_ip_address: 192.168.101.11
