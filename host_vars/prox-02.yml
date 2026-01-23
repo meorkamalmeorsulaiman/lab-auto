@@ -26,6 +26,11 @@ virtual_machines:
     vm_ip_address: 192.168.101.247
     start: false
     delete: false
+  - name: JUMP-01
+    vm_id: 107
+    vm_ip_address: 192.168.101.246
+    start: false
+    delete: false
   - name: CTRL-01
     vm_id: 111
     vm_ip_address: 192.168.101.11
