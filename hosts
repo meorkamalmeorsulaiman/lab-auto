@@ -1,4 +1,5 @@
 [proxmox]
+prox-01 ansible_host=192.168.100.254
 prox-02 ansible_host=192.168.101.254
 
 [dns_forward_zones]
