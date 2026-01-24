@@ -1,6 +1,6 @@
 ---
 - name: Deploying VM on proxmox
-  hosts: prox-02
+  hosts: {{ DEPLOY_HOST }}
   become: false
   gather_facts: false
   vars:
