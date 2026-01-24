@@ -1,9 +1,7 @@
 ---
 proxmox_user:  ansible@pam
 proxmox_token_id: ansible-token
-proxmox_token_secret: "{{ lookup('env', 'PROX_TOKEN_ID') }}"
 task_timeout: 500
-clone_source: UBUNTU-TMPLT
+clone_source: UBUNTU-24-TMPLT
 clone_source_id: 101
-gateway: 192.168.101.1
 ansible_user: ansible

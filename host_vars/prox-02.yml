@@ -1,5 +1,7 @@
 ---
 proxmox_node: prox02
+proxmox_token_secret: "{{ lookup('env', 'PROX02_TOKEN_ID') }}"
+gateway: 192.168.101.1
 virtual_machines:
   - name: JNKN-01
     vm_id: 102
