@@ -1,0 +1,10 @@
+records:
+  - name: int.mmkbmss.com
+    nameserver: ns2
+    forward_records:
+      - name: ns2
+        ip: 192.168.101.250
+        type: A
+      - name: jenkins
+        ip: 192.168.101.250
+        type: A

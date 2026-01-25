@@ -8,4 +8,8 @@ virtual_machines:
     vm_ip_address: 192.168.100.251
     start: false
     delete: false
-
+  - name: DNS01
+    vm_id: 105
+    vm_ip_address: 192.168.100.250
+    start: false
+    delete: false
