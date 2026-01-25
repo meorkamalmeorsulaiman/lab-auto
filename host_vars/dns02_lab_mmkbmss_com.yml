@@ -5,6 +5,9 @@ records:
       - name: ns2
         ip: 192.168.101.250
         type: A
+      - name: ns1
+        ip: 192.168.100.250
+        type: A
       - name: jump01
         ip: 192.168.100.251
         type: A
