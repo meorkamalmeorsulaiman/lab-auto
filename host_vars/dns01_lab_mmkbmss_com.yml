@@ -14,4 +14,10 @@ records:
       - name: jump02
         ip: 192.168.101.251
         type: A
+      - name: strg01
+        ip: 192.168.100.249
+        type: A
+      - name: strg02
+        ip: 192.168.101.249
+        type: A
 
