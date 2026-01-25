@@ -13,3 +13,8 @@ virtual_machines:
     vm_ip_address: 192.168.100.250
     start: false
     delete: false
+  - name: DOCKER01
+    vm_id: 106
+    vm_ip_address: 192.168.100.249
+    start: false
+    delete: false
