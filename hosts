@@ -1,52 +1,65 @@
 [proxmox]
-prox-01 ansible_host=192.168.100.254
-prox-02 ansible_host=192.168.101.254
+prox01 ansible_host=192.168.100.254
+prox02 ansible_host=192.168.101.254
 
 [dns_forward_zones]
-lab_mmkbmss_com ansible_host=192.168.101.248
-int_mmkbmss_com ansible_host=192.168.101.248
+dns01_lab_mmkbmss_com ansible_host=192.168.100.250
+dns01_int_mmkbmss_com ansible_host=192.168.100.250
+dns02_lab_mmkbmss_com ansible_host=192.168.101.250
+dns02_int_mmkbmss_com ansible_host=192.168.101.250
+
 
 [dns_reverse_zone]
-ptr_mmkbmss_com ansible_host=192.168.101.248
+dns01_ptr_mmkbmss_com ansible_host=192.168.100.250
+dns02_ptr_mmkbmss_com ansible_host=192.168.101.250
 
 [dns]
-dns-01 ansible_host=192.168.101.248 nameserver=true
-lab_mmkbmss_com ansible_host=192.168.101.248 nameserver=false
-int_mmkbmss_com ansible_host=192.168.101.248 nameserver=false
-ptr_mmkbmss_com ansible_host=192.168.101.248 nameserver=false
+dns01 ansible_host=192.168.100.250 nameserver=true
+dns02 ansible_host=192.168.100.250 nameserver=true
+dns01_lab_mmkbmss_com ansible_host=192.168.100.250 nameserver=false
+dns01_int_mmkbmss_com ansible_host=192.168.100.250 nameserver=false
+dns01_ptr_mmkbmss_com ansible_host=192.168.100.250 nameserver=false
+dns02_lab_mmkbmss_com ansible_host=192.168.101.250 nameserver=false
+dns02_int_mmkbmss_com ansible_host=192.168.101.250 nameserver=false
+dns02_ptr_mmkbmss_com ansible_host=192.168.101.250 nameserver=false
+
+
+[lab_mmkbmss_com]
+dns01 ansible_host=192.168.100.250
+dns02 ansible_host=192.168.101.250
 
 [jenkins_controllers]
-jnkn-01 ansible_host=192.168.101.250
+jnkn01 ansible_host=192.168.100.250
 
 [jenkins_agents]
-jnkn-agnt-01 ansible_host=192.168.101.249
+jnknagnt01 ansible_host=192.168.101.249
 
 [jenkins_nodes]
-jnkn-01 ansible_host=192.168.101.250
-jnkn-agnt-01 ansible_host=192.168.101.249
+jnkn01 ansible_host=192.168.100.250
+jnknagnt01 ansible_host=192.168.101.249
 
 [k8s_controllers]
-ctrl-01 ansible_host=192.168.101.11
-ctrl-02 ansible_host=192.168.101.12
-ctrl-03 ansible_host=192.168.101.13
+ctrl01 ansible_host=192.168.101.11
+ctrl02 ansible_host=192.168.101.12
+ctrl03 ansible_host=192.168.101.13
 
 [k8s_controllers_master]
-ctrl-01 ansible_host=192.168.101.11
+ctrl01 ansible_host=192.168.101.11
 
 [k8s_controllers_slave]
-ctrl-02 ansible_host=192.168.101.12
-ctrl-03 ansible_host=192.168.101.13
+ctrl02 ansible_host=192.168.101.12
+ctrl03 ansible_host=192.168.101.13
 
 [k8s_workers]
-wrk-01 ansible_host=192.168.101.21
-wrk-02 ansible_host=192.168.101.22
-wrk-03 ansible_host=192.168.101.23
+wrk01 ansible_host=192.168.101.21
+wrk02 ansible_host=192.168.101.22
+wrk03 ansible_host=192.168.101.23
 
 [k8s_nodes]
-ctrl-01 ansible_host=192.168.101.11
-ctrl-02 ansible_host=192.168.101.12
-ctrl-03 ansible_host=192.168.101.13
-wrk-01 ansible_host=192.168.101.21
-wrk-02 ansible_host=192.168.101.22
-wrk-03 ansible_host=192.168.101.23
+ctrl01 ansible_host=192.168.101.11
+ctrl02 ansible_host=192.168.101.12
+ctrl03 ansible_host=192.168.101.13
+wrk01 ansible_host=192.168.101.21
+wrk02 ansible_host=192.168.101.22
+wrk03 ansible_host=192.168.101.23
 

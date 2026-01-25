@@ -27,6 +27,10 @@
     name: "{{ item.name }}"
     ipconfig: 
       ipconfig0: "ip={{ item.vm_ip_address }}/24,gw={{ gateway }}"
+    searchdomains: "mmkbmss.com,int.mmkbmss.com,lab.mmkbmss.com"
+    nameservers:
+      - "192.168.100.250"
+      - "192.168.101.250"
     update: true
     timeout: "{{ task_timeout }}"
   loop: "{{ virtual_machines }}"

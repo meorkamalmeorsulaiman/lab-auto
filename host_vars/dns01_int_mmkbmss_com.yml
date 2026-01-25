@@ -1,9 +1,9 @@
 records:
-  - name: lab.mmkbmss.com
+  - name: int.mmkbmss.com
     nameserver: ns1
     forward_records:
       - name: ns1
-        ip: 192.168.101.248
+        ip: 192.168.100.250
         type: A
       - name: jenkins
         ip: 192.168.101.250
