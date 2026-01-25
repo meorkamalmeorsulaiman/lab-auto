@@ -8,6 +8,11 @@ virtual_machines:
     vm_ip_address: 192.168.101.253
     start: false
     delete: false
+  - name: JUMP02
+    vm_id: 104
+    vm_ip_address: 192.168.101.251
+    start: false
+    delete: false
   - name: DNS02
     vm_id: 105
     vm_ip_address: 192.168.101.250
