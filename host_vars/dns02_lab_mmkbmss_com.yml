@@ -26,3 +26,21 @@ records:
       - name: prox02
         ip: 192.168.101.254
         type: A
+      - name: ctrl01
+        ip: 192.168.101.11
+        type: A
+      - name: ctrl02
+        ip: 192.168.101.12
+        type: A
+      - name: ctrl03
+        ip: 192.168.101.254
+        type: A
+      - name: wrk01
+        ip: 192.168.101.21
+        type: A
+      - name: wrk02
+        ip: 192.168.101.22
+        type: A
+      - name: wrk03
+        ip: 192.168.101.23
+        type: A
