@@ -3,8 +3,8 @@ proxmox_node: prox01
 proxmox_token_secret: "{{ lookup('env', 'PROX01_TOKEN_ID') }}"
 gateway: 192.168.100.1
 virtual_machines:
-  - name: JUMP-01
-    vm_id: 103
+  - name: JUMP01
+    vm_id: 104
     vm_ip_address: 192.168.100.251
     start: false
     delete: false
