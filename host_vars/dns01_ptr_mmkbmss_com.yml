@@ -12,3 +12,8 @@ records:
         ip: "250.100"
       - name: jump02
         ip: "251.101"
+      - name: strg01
+        ip: "249.100"
+      - name: strg02
+        ip: "249.101"
+
