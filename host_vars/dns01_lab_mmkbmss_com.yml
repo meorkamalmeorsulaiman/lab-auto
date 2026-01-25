@@ -9,6 +9,6 @@ records:
         ip: 192.168.100.251
         type: A
       - name: jump02
-        ip: 192.168.101.21
+        ip: 192.168.101.251
         type: A
 
