@@ -12,8 +12,11 @@ records:
         ip: "251.100"
       - name: jump02
         ip: "251.101"
-      - name: strg01
+      - name: docker01
         ip: "249.100"
       - name: strg02
         ip: "249.101"
-
+      - name: prox01
+        ip: "254.100"
+      - name: prox02
+        ip: "254.101"
