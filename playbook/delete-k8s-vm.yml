@@ -1,6 +1,6 @@
 ---
-- name: Deploying VM on proxmox
-  hosts: prox-02
+- name: Deleting K8s VM on proxmox
+  hosts: prox02
   become: false
   gather_facts: false
   vars:
