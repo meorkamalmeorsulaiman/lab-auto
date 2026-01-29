@@ -7,32 +7,32 @@
     ansible_python_interpreter: /usr/bin/python3
     proxmox_node: prox02
     virtual_machines:
-    - name: CTRL-01
+    - name: CTRL01
       vm_id: 111
       vm_ip_address: 192.168.101.11
       start: false
       delete: true
-    - name: CTRL-02
+    - name: CTRL02
       vm_id: 112
       vm_ip_address: 192.168.101.12
       start: false
       delete: true
-    - name: CTRL-03
+    - name: CTRL03
       vm_id: 113
       vm_ip_address: 192.168.101.13
       start: false
       delete: true
-    - name: WRK-01
+    - name: WRK01
       vm_id: 121
       vm_ip_address: 192.168.101.21
       start: false
       delete: true
-    - name: WRK-02
+    - name: WRK02
       vm_id: 122
       vm_ip_address: 192.168.101.22
       start: false
       delete: true
-    - name: WRK-03
+    - name: WRK03
       vm_id: 123
       vm_ip_address: 192.168.101.23
       start: false
