@@ -33,7 +33,7 @@ records:
         ip: 192.168.101.12
         type: A
       - name: ctrl03
-        ip: 192.168.101.254
+        ip: 192.168.101.13
         type: A
       - name: wrk01
         ip: 192.168.101.21
