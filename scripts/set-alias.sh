@@ -12,5 +12,6 @@ SERVERS=(
 )
 
 for SERVER in "${SERVERS[@]}"; do
-	echo "alias "$SERVER"='ssh "$SERVER"'" 
+	SHORT="${SERVER//[trl0k]/}"
+	echo "alias "$SHORT"='ssh "$SERVER"'" 
 done
