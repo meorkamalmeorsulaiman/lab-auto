@@ -1,4 +1,5 @@
 ---
+bind9_exporter_version: 0.8.0
 reverse_zones: 
   - name: lab.mmkbmss.com
     ptr: 168.192
