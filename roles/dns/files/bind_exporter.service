@@ -1,0 +1,24 @@
+[Unit]
+Description=Prometheus
+Documentation=https://github.com/prometheus-community/bind_exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=prometheus
+Group=prometheus
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart=/usr/local/bin/bind_exporter \
+  --bind.pid-file=/var/run/named/named.pid \
+  --bind.timeout=20s \
+  --web.listen-address=0.0.0.0:9153 \
+  --web.telemetry-path=/metrics \
+  --bind.stats-url=http://127.0.0.1:8053/ \
+  --bind.stats-groups=server,view,tasks
+
+SyslogIdentifier=prometheus
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
